@@ -9,13 +9,13 @@ struct record {									//诊疗记录
 	int num_check;                              //挂号
 	patient pat;								//患者信息
 	doctor doc;									//医生信息
-    char out_doc[15];							//出诊时间
+    char out_doc[12];							//出诊时间
 	treat tre;									//诊疗情况
 	record* next = NULL;					    //链表实现
 };
 
 struct patient {								//患者信息结构体
-	char name_pat[30];						    //患者姓名
+	char name_pat[5];						    //患者姓名
 	int age;									//年龄	
 	int tag_pat;                                //身份识别码(编码规则待定)
 	patient* next = NULL;				        //链表实现
@@ -23,9 +23,9 @@ struct patient {								//患者信息结构体
 
 struct doctor {									//医生信息结构体
 	char name_doc[30];					        //医生姓名
-	char level[30];							    //医生级别
-	char sub[30];							    //医生科室
-	int num_work;								//医生工号	
+	char level[5];							    //医生级别
+	char sub[10];							    //医生科室
+	int num_work;								//医生工号
 	doctor* next = NULL;                        //链表实现
 };
 
@@ -60,4 +60,4 @@ struct hospital {								//住院信息结构体
 
 #endif
 
-//modified by Nero J on 9/15
+//modified by Nero J on 9/15 test test
