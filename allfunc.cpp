@@ -2,6 +2,7 @@
 #include<malloc.h>
 #include<string.h>
 #include"base_struct.h"
+#include"allfunc.h"
 
 float sumcheck(int tag_check,float cost_term[])              //¼ÆËã¼ì²é×Ü·ÑÓÃº¯Êý
 {
@@ -69,38 +70,12 @@ int cost_hos(int a,int b,int c)           //×¡Ôº·ÑÓÃº¯Êý
 	return sum;
 }
 
-bool judeg_name_pat(struct record* j)
-{
-	bool flag = false;
-	int i = 0;
-	while ((j->pat.name_pat[i]) != '\0')
-	{
-		if ((j->pat.name_pat[i]) >= 128)
-			flag = true;
-		i++;
-	}
-	return flag;
-}
-
-bool judeg_name_pat(struct record* j)
-{
-	bool flag = false;
-	int i = 0;
-	while ((j->pat.name_pat[i]) != '\0')
-	{
-		if ((j->pat.name_pat[i]) >= 128)
-			flag = true;
-		i++;
-	}
-	return flag;
-}
-
-int getrecord(struct record* head)
+void getrecord(struct record* head)
 {
 	record* temp = (record*)malloc(sizeof(record));
 	temp->next = NULL;
-	record* p, * q, * r;
-	p = head; q = p->next; r = q->next;
+	record* p, * q;
+	p = head; q = p->next;
 	while (q != NULL)
 	{
 		q = q->next;
@@ -112,19 +87,6 @@ int getrecord(struct record* head)
 		scanf("%s %d", &(q->pat.name_pat), &(q->pat.age));
 		printf("ÇëÊäÈë¹ÒºÅ\n");
 		scanf("%d", q->num_check);
-		while (r != NULL)
-		{
-			if ((r->num_check) != (q->num_check))
-			{
-				r = r->next;
-			}
-			else
-			{
-				printf("¹ÒºÅÖØ¸´£¬Çë¼ì²éºóÖØÐÂÊäÈë£¡"); 
-				free(temp);
-				return 1;
-			}
-		}
 		printf("ÇëÊäÈëÒ½ÉúÐÅÏ¢\n");
 		scanf("%s%s%s%d",&(q->doc.name_doc) , &(q->doc.level), &(q->doc.sub), &(q->doc.num_work));
 		printf("ÇëÊäÈë³öÕïÊ±¼ä\n");
@@ -160,8 +122,9 @@ int getrecord(struct record* head)
 		printf("ÇëÊäÈë¿ªÊ¼×¡ÔºÊ±¼ä£¬Ô¤¼Æ³öÔºÊ±¼ä¼°ÒÑ½»ÄÉµÄ×¡ÔºÑº½ð\n");
 		scanf("%d%d%d", &(q->tre.hos.time_start), &(q->tre.hos.time_end), &(q->tre.hos.deposit));
 		(q->tre.hos.days_hos) = days_hosp(q->tre.hos.time_start, q->tre.hos.time_end);
+		free(temp);
 	}
-	return 0;
+	return;
 }
 
 void outpatient_tag(struct record* head, int tag_in)   //ÒÀ¾Ý»¼ÕßÏà¹ØÐÅÏ¢Êä³öÊý¾Ý
@@ -191,7 +154,7 @@ void outpatient_tag(struct record* head, int tag_in)   //ÒÀ¾Ý»¼ÕßÏà¹ØÐÅÏ¢Êä³öÊý¾
 	return;
 }
 
-void outpatient_name(struct record* head, char name[30])
+void outpatient_name(struct record* head, char name[30])		//¼ìË÷»¼ÕßÐÕÃû²¢Êä³ö
 {
 	record* p, * q;
 	p = head; q = head->next;

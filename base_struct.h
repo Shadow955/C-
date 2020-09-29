@@ -1,19 +1,11 @@
 //base_struct.h version2.0 designed by Nero J on 9/11
 //update to version2.1 by WSX on 9/15
+//update to version2.2 by Nero J on 9/29
 
 #ifndef BASE_STRUCT
 #define BASE_STRUCT
 
 #include<stdio.h>
-struct record {									//诊疗记录
-	int num_check;                              //挂号
-	patient pat;								//患者信息
-	doctor doc;									//医生信息
-    char out_doc[12];							//出诊时间
-	treat tre;									//诊疗情况
-	record* next = NULL;					    //链表实现
-};
-
 struct patient {								//患者信息结构体
 	char name_pat[5];						    //患者姓名
 	int age;									//年龄	
@@ -22,17 +14,11 @@ struct patient {								//患者信息结构体
 };
 
 struct doctor {									//医生信息结构体
-	char name_doc[30];					        //医生姓名
+	char name_doc[5];					        //医生姓名
 	char level[5];							    //医生级别
-	char sub[10];							    //医生科室
+	char sub[5];							    //医生科室
 	int num_work;								//医生工号
 	doctor* next = NULL;                        //链表实现
-};
-
-struct treat {									//诊疗情况
-    check che;									//检查情况
-	pill pil;									//开药情况
-	hospital hos;								//住院信息
 };
 
 struct check {									//检查结构体
@@ -58,6 +44,21 @@ struct hospital {								//住院信息结构体
     int deposit;                                //住院押金
 };
 
+struct treat {									//诊疗情况
+	struct check che;									//检查情况
+	struct pill pil;									//开药情况
+	struct hospital hos;								//住院信息
+};
+
+struct record {									//诊疗记录
+	int num_check;                              //挂号
+	struct patient pat;								//患者信息
+	struct doctor doc;									//医生信息
+	char out_doc[12];							//出诊时间
+	struct treat tre;									//诊疗情况
+	record* next = NULL;					    //链表实现
+};
+
 #endif
 
-//modified by Nero J on 9/15 test test
+//modified by Nero J on 9/15
