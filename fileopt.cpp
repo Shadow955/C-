@@ -17,11 +17,11 @@ int openfile() {															//文件读入函数
 	infile = fopen("test.txt", "a");							//读取文件并判断是否成功打开
 	if (infile == NULL)
 	{
-		printf("文件打开失败！请检查源文件！");		//打开失败结束并返回上层
+		printf("文件打开失败！请检查源文件！\n");		//打开失败结束并返回上层
 		return 0;
 	}
 	else
-		printf("文件打开成功！");
+		printf("文件打开成功！\n");
 }
 void read_and_link() {
 
