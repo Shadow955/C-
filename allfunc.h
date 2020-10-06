@@ -14,4 +14,20 @@ void getrecord(struct record* head);
 
 void outpatient_tag(struct record* head, int tag_in);  //依据患者相关信息输出数据
 
-void outpatient_name(struct record* head, char name[30]);		//检索患者姓名并输出
+void outpatient_name(struct record* head);		//检索患者姓名并输出
+
+void outsub_doc(struct record* head);  //科室检索
+
+void outname_doc(struct record* head);  //医生工号检索
+
+void outtime_limit(struct record* head);     //时间段检索
+
+void output(struct record* head); //输出诊疗记录
+
+void del_record(struct record* head); //删除操作
+
+void input(struct record* p);  //录入诊疗记录
+
+void alter_record(struct record* head);  //修改操作
+
+float statistics(struct record* head);   //营业额

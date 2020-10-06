@@ -2,4 +2,6 @@
 
 int openfile();
 
-void read_and_link();
+record*  read_and_link();
+
+void printf_number();

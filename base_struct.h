@@ -33,7 +33,7 @@ struct pill {									//药品结构体
 	char name_pill[30][30];				        //药品名称
 	int cost_perpill[30];                       //单价
 	int num_pill[30];                           //数量
-	float cost_pill;                              //药品总价
+	float cost_pill;                            //药品总价
 };
 
 struct hospital {								//住院信息结构体
@@ -45,17 +45,17 @@ struct hospital {								//住院信息结构体
 };
 
 struct treat {									//诊疗情况
-	struct check che;									//检查情况
-	struct pill pil;									//开药情况
-	struct hospital hos;								//住院信息
+	struct check che;							//检查情况
+	struct pill pil;							//开药情况
+	struct hospital hos;						//住院信息
 };
 
 struct record {									//诊疗记录
 	int num_check;                              //挂号
-	struct patient pat;								//患者信息
-	struct doctor doc;									//医生信息
-	char out_doc[12];							//出诊时间
-	struct treat tre;									//诊疗情况
+	struct patient pat;							//患者信息
+	struct doctor doc;							//医生信息
+	char out_doc[9];							//出诊时间
+	struct treat tre;							//诊疗情况
 	record* next = NULL;					    //链表实现
 };
 

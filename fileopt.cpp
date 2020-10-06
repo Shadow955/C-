@@ -4,6 +4,7 @@
 #include"base_struct.h"
 #include<string.h>
 #include"fileopt.h"
+#include"allfunc.h"
 struct record* rec_head;
 FILE* infile;																//源文件为infile，更改后的输出文件为outfile
 FILE* outfile;
@@ -23,7 +24,8 @@ int openfile() {															//文件读入函数
 	else
 		printf("文件打开成功！\n");
 }
-void read_and_link() {
+record* read_and_link() 
+{
 
 
 	/***********************************************************
@@ -34,23 +36,16 @@ void read_and_link() {
 
 
 	rec_head = (record*)malloc(sizeof(record));		//建立头节点
-	rec_head->next = NULL;
-	record* rec_this = rec_head;								//建立当前节点
+	//rec_head->next = NULL;
+	//record* rec_this = rec_head;								//建立当前节点
+	//record* rec_temp;
 	record* rec_temp = (record*)malloc(sizeof(record));//默认建立新节点
-	while (1)																//循环读入直至文件末尾
+	rec_head->next = rec_temp;
+	while (!EOF)																//循环读入直至文件末尾
 	{
-		if (fscanf(infile, "%ld %s %d %d"					//读入挂号及患者信息部分
-			, &(rec_temp->num_check)
-			, (rec_temp->pat.name_pat)
-			, &(rec_temp->pat.age)
-			, &(rec_temp->pat.tag_pat)) == EOF)
-		{
-			free(rec_temp);											//若文件结束则删除冗余的新节点
-			break;
-		}
-		else
-		{
-			fscanf(infile, "%s %s %s %ld"						//读入医生信息部分
+		//rec_temp = (record*)malloc(sizeof(record));//默认建立新节点
+		fscanf(infile, "%d %s %d %d", &rec_temp->num_check, rec_temp->pat.name_pat, &rec_temp->pat.age, &rec_temp->pat.tag_pat);
+			fscanf(infile, "%s %s %s %d"						//读入医生信息部分
 				, (rec_temp->doc.name_doc)
 				, (rec_temp->doc.level)
 				, (rec_temp->doc.sub)
@@ -75,15 +70,32 @@ void read_and_link() {
 				, &(rec_temp->tre.hos.time_start)
 				, &(rec_temp->tre.hos.time_end)
 				, &rec_temp->tre.hos.deposit);
-		}
+		
+		rec_temp->next = (record*)malloc(sizeof(record));
+		rec_temp = rec_temp->next;
 	}
-	rec_temp->next = NULL;											//准备建立新节点
-	rec_this->next = rec_temp;
-	rec_this = rec_temp;
+	//if (rec_head->next == NULL)
+	//	rec_head = rec_temp;
+	//rec_temp->next = NULL;											//准备建立新节点
+	//rec_this->next = rec_temp;
+	//rec_this = rec_temp;
 	fclose(infile);
+	printf("链表构建成功！");
+	return rec_head->next;
 	/****************************************
 
 	链表建立后是否立即关闭文件？有待探讨
 
 	***************************************/
+}
+void printf_number() {
+	int number1;//保存输入的数字
+	printf("请输入功能对应的数字：\n1:打印某科室诊疗信息\n2:打印某医生诊疗信息\n3:打印某患者历史诊疗记录\n4:打印某段时间内的诊疗记录");
+	scanf("%d", &number1);
+	switch (number1) {
+	case 1: void outsub_doc(struct record* head); break;//打印某科室诊疗信息
+	case 2: void outname_doc(struct record* head); break;//打印某医生诊疗信息
+	case 3: outpatient_name(rec_head); break;//打印某患者历史诊疗记录
+	case 4: void outtime_limit(struct record* head); break;//打印某段时间内的诊疗记录
+	}
 }
